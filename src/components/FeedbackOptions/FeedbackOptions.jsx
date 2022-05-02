@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Btn } from './FeedbackOptions.styled';
 
-function FeedbackOptions({ handleFeedback, options}) {
+function FeedbackOptions({ handleFeedback, options }) {
   return (
     <div>
       {Object.keys(options).map(option => (
@@ -16,7 +16,7 @@ function FeedbackOptions({ handleFeedback, options}) {
 
 FeedbackOptions.propTypes = {
   handleFeedback: PropTypes.func.isRequired,
-  options: PropTypes.object.isRequired, 
+  options: PropTypes.object.isRequired,
 };
 
 export default FeedbackOptions;

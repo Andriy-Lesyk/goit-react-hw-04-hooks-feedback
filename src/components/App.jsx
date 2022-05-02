@@ -11,22 +11,12 @@ export default function App() {
     neutral: 0,
   });
 
-  /*const handleIncrement = event => {
-    const feedback = event.currentTarget.name;
-    setOptions(() => {
-      for (const key in options) {
-        if (key === feedback) {
-          options[key] += 1;
-          console.log(options);
-        }
-      }
-    });
-  };*/
-
   const handleIncrement = event => {
     const feedback = event.currentTarget.name;
-    setOptions(prevState =>  prevState[feedback] + 1,
-    );
+    setOptions(prevState => ({
+      ...prevState,
+      [feedback]: prevState[feedback] + 1,
+    }));
   };
 
   const total = options.good + options.bad + options.neutral;
