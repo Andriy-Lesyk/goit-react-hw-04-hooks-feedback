@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Btn } from './FeedbackOptions.styled';
 
-function FeedbackOptions({ handleFeedback}) {
+function FeedbackOptions({ handleFeedback, options}) {
   return (
     <div>
-      <Btn name={'good'} onClick={handleFeedback}>good</Btn>
-      <Btn name={'neutral'} onClick={handleFeedback}>neutral</Btn>
-      <Btn name={'bad'} onClick={handleFeedback}>bad</Btn>
+      {Object.keys(options).map(option => (
+        <Btn key={option} name={option} onClick={handleFeedback}>
+          {option}
+        </Btn>
+      ))}
     </div>
   );
 }
 
 FeedbackOptions.propTypes = {
   handleFeedback: PropTypes.func.isRequired,
+  options: PropTypes.object.isRequired, 
 };
 
 export default FeedbackOptions;

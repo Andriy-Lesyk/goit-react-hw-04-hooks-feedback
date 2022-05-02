@@ -5,43 +5,45 @@ import Statistics from './Statistics/Statistics';
 import Notification from './Notification/Notification';
 
 export default function App() {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [options, setOptions] = useState({
+    good: 0,
+    bad: 0,
+    neutral: 0,
+  });
+
+  /*const handleIncrement = event => {
+    const feedback = event.currentTarget.name;
+    setOptions(() => {
+      for (const key in options) {
+        if (key === feedback) {
+          options[key] += 1;
+          console.log(options);
+        }
+      }
+    });
+  };*/
 
   const handleIncrement = event => {
-    switch (event.target.name) {
-      case 'good':
-        setGood(prevState => prevState + 1);
-        break;
-
-      case 'neutral':
-        setNeutral(prevState => prevState + 1);
-        break;
-
-      case 'bad':
-        setBad(prevState => prevState + 1);
-        break;
-
-      default:
-        return;
-    }
+    const feedback = event.currentTarget.name;
+    setOptions(prevState =>  prevState[feedback] + 1,
+    );
   };
 
-  const total = good + bad + neutral;
+  const total = options.good + options.bad + options.neutral;
   const handleIncrementTotal = () => total;
 
-  const handleIncrementPositive = () => Math.round((good / total) * 100);
+  const handleIncrementPositive = () =>
+    Math.round((options.good / total) * 100);
 
   return (
     <div>
       <Section title="Please leave feedback">
-        <FeedbackOptions handleFeedback={handleIncrement} />
-        {good !== 0 || bad !== 0 || neutral !== 0 ? (
+        <FeedbackOptions options={options} handleFeedback={handleIncrement} />
+        {options.good !== 0 || options.bad !== 0 || options.neutral !== 0 ? (
           <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
+            good={options.good}
+            neutral={options.neutral}
+            bad={options.bad}
             total={handleIncrementTotal()}
             positivePercentage={handleIncrementPositive()}
           />
